@@ -12,21 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-VERSION ?nIMAGE_REGISTRY ?= nvcr.io/nvidia/cloud-native
-MAGE_NAME ?= gpu_TAG ?= $(VERSION)
-IMAGE = $(IMAGE_REGISTRY)/$(IMAGE_NAME):$(IMAGE_TAG)
-
-# Go settings
-GO ?= go
-GOFLAGS ?= -mod= linux
-md64
+VERSION ?= latest
+IMAGE_REGISTRY ?= nvcr.io/nvidia/cloud-native
+IMAGE_NAME ?= gpu-operator
+IMAGE_TAG ?= $(VERSION)
+IMAGE = $(IMAGE_REGISTRY)/$(IMAGE_NAME):$( Go settings
+GO ?=GS ?= -mod=modnGOOS ?= linux
+G64
 
 # Directories
-ROOT_DIR := $(shell dirname $(realpath $())))
+ROOT_DIR := $(shell dirname $(realpath $(lastLIST))))
 BIN_DIR := $(ROOT_DIR)/bin
 COVER_DIR := $(ROOT_DIR)/coverage
 
-.PHONY: all
 all: build
 
 ## Build the GPU operator binary
@@ -108,4 +106,7 @@ install: manifests
 uninstall: manifests
 	kustomize build config/crd | kubectl delete -f -
 
-## Deploy the operator to the clus
+## Deploy the operator to the cluster
+.PHONY: deploy
+deploy: manifests
+	kustomize build config/default | kubectl apply -f -
