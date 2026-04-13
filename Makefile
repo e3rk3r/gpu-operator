@@ -12,20 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-V= v24.9.0
-IREGISTRY ?= nvcr.io/nvidia/cloud-native
-IMAGE_NAME ?= gpu-operator
+VERSION ?= v24.9.0
+IGE_REGISTRY ?= nvcr.io/nvidia/cloud-native
+-operator
 IMAGE_TAG ?= $(VERSION)
 IMAGE = $(IMAGE_REGISTRY)/$(IMAGE_NAME):$(IMAGE_TAG)
 
-# Go build settings
-GO ?= go
+#= go
 GOFLAGS ?= -mod=mod
-GOOS ?= linux
-GOARCH ?= amd64
+GOOS ?= ?= amd64
 
 # Directories
-RODIR :=shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+ROOT_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 BIN_DIR := $(ROOT_DIR)/bin
 COVER_DIR := $(ROOT_DIR)/coverage
 
@@ -111,24 +109,4 @@ install: manifests
 uninstall: manifests
 	kustomize build config/crd | kubectl delete -f -
 
-## Deploy the operator to the cluster
-.PHONY: deploy
-deploy: manifests
-	kustomize build config/default | kubectl apply -f -
-
-## Undeploy the operator from the cluster
-.PHONY: undeploy
-undeploy:
-	kustomize build config/default | kubectl delete -f -
-
-## Clean build artifacts
-.PHONY: clean
-clean:
-	@echo "Cleaning build artifacts..."
-	rm -rf $(BIN_DIR)
-	rm -rf $(COVER_DIR)
-
-## Display help
-.PHONY: help
-help:
-	@grep -E '^## ' $(MAKEFILE_LIST) | sed 's/## //' | awk 'BEGIN {FS = "\n"}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+## Deploy the operator to the clus
