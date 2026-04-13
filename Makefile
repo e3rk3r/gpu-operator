@@ -12,18 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-VERSION ?= v24.9.0
-IGE_REGISTRY ?= nvcr.io/nvidia/cloud-native
--operator
-IMAGE_TAG ?= $(VERSION)
+VERSION ?nIMAGE_REGISTRY ?= nvcr.io/nvidia/cloud-native
+MAGE_NAME ?= gpu_TAG ?= $(VERSION)
 IMAGE = $(IMAGE_REGISTRY)/$(IMAGE_NAME):$(IMAGE_TAG)
 
-#= go
-GOFLAGS ?= -mod=mod
-GOOS ?= ?= amd64
+# Go settings
+GO ?= go
+GOFLAGS ?= -mod= linux
+md64
 
 # Directories
-ROOT_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+ROOT_DIR := $(shell dirname $(realpath $())))
 BIN_DIR := $(ROOT_DIR)/bin
 COVER_DIR := $(ROOT_DIR)/coverage
 
