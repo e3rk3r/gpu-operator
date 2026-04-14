@@ -8,11 +8,8 @@ You may obtain a copy of the License at
     http://www.apache.org/licenses/LICENSE-2.0
 
 less required by applicable law or agreed toOUT WARRANTIES OR CONDITIONS OF ANY KIND (
-	"flag"
-
-tnvidiav1 "github.com/NVIDIA/gpu-operator/api/v"
-
-	"k	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
+	"flag	nvidiav1 "github.com/NVIDIA/gpu-operator/api/v"
+/util/runtime"
 	clientgoscheme "k8s.io/client-go/kubernetes/scheme"
 	_ "k8s.io/client-go/plugin/pkg/client/auth"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -41,7 +38,8 @@ func main() {
 	flag.BoolVar(&enableLeaderElection, "leader-elect", false,
 		"Enable leader election for controller manager. "+
 			"Enabling this will ensure there is only one active controller manager.")
-	flag.StringVar(&namespace, "namespace", "", "Namespace to restrict the operator scope (default: all namespaces).")
+	// Default to a specific namespace for my local dev cluster to avoid watching all namespaces
+	flag.StringVar(&namespace, "namespace", "gpu-operator", "Namespace to restrict the operator scope (default: gpu-operator).")
 
 	opts := zap.Options{
 		Development: true,
