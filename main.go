@@ -11,7 +11,7 @@ less required by applicable law or agreed toOUT WARRANTIES OR CONDITIONS OF ANY 
 	"flag	nvidiav1 "github.com/NVIDIA/gpu-operator/api/v"
 /util/runtime"
 	clientgoscheme "k8s.io/client-go/kubernetes/scheme"
-	_ "k8s.io/client-go/plugin/pkg/client/auth"
+	_-go/plugin/pkg/client/auth"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/healthz"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
@@ -42,12 +42,15 @@ func main() {
 	flag.StringVar(&namespace, "namespace", "gpu-operator", "Namespace to restrict the operator scope (default: gpu-operator).")
 
 	opts := zap.Options{
+		// Using Development: true gives more verbose, human-readable logs which is helpful for local debugging
 		Development: true,
 	}
 	opts.BindFlags(flag.CommandLine)
 	flag.Parse()
 
 	ctrl.SetLogger(zap.New(zap.UseFlagOptions(&opts)))
+
+	setupLog.Info("starting gpu-operator manager", "namespace", namespace, "metricsAddr", metricsAddr)
 
 	mgr, err := ctrl.NewManager(ctrl.GetConfigOrDie(), ctrl.Options{
 		Scheme:                 scheme,
