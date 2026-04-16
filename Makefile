@@ -4,24 +4,16 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-VERSION ?= latest
-IMAGE_REGISTRY ?= nvcr.io/nvidia/cloud-native
-IMAGE_NAME ?= gpu-operator
-IMAGE_TAG ?= $(VERSION)
-IMAGE = $(IMAGE_REGISTRY)/$(IMAGE_NAME):$( Go settings
-GO ?=GS ?= -mod=modnGOOS ?= linux
-G64
+#     http://www.apache.org/licenses/LICENSE-2.0 by applicable law or agreed to in writing" BASIS,
+# WITHOUT WARRANTIESn# limitations under the License.
+= latest
+I nvcr.io/nvidia/MAGE_NAME ?= gpu_TAG ?= $(VERSION)
+$( Go go
+GOFLAGS ?= -modnGOOS ?= linux
+GOARCH ?= amd64
 
 # Directories
-ROOT_DIR := $(shell dirname $(realpath $(lastLIST))))
+ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 BIN_DIR := $(ROOT_DIR)/bin
 COVER_DIR := $(ROOT_DIR)/coverage
 
