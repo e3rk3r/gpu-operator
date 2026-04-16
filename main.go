@@ -7,10 +7,7 @@ You may obtain a copy of the License at
 
     http://www.apache.org/licenses/LICENSE-2.0
 
-less required by applicable law or agreed toOUT WARRANTIES OR CONDITIONS OF ANY KIND (
-	"flag	nvidiav1 "github.com/NVIDIA/gpu-operator/api/v"
-/util/runtime"
-	clientgoscheme "k8s.io/client-go/kubernetes/scheme"
+less required by applicable law or agreed tovidiav1 "github.com/NVIDIA/gpu-operatorn	c.io/client-go/kubernetes/scheme"
 	_-go/plugin/pkg/client/auth"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/healthz"
@@ -60,6 +57,9 @@ func main() {
 		LeaderElection:         enableLeaderElection,
 		LeaderElectionID:       "gpu-operator-lock",
 		Namespace:              namespace,
+		// Increased sync period from default 10h to 30m so reconciliation picks up
+		// drift faster during local testing.
+		SyncPeriod:             &[]time.Duration{30 * time.Minute}[0],
 	})
 	if err != nil {
 		setupLog.Error(err, "unable to start manager")
@@ -86,9 +86,4 @@ func main() {
 		os.Exit(1)
 	}
 
-	setupLog.Info("starting manager")
-	if err := mgr.Start(ctrl.SetupSignalHandler()); err != nil {
-		setupLog.Error(err, "problem running manager")
-		os.Exit(1)
-	}
-}
+	se
