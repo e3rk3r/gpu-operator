@@ -7,9 +7,7 @@ You may obtain a copy of the License at
 
     http://www.apache.org/licenses/LICENSE-2.0
 
-less required by applicable law or agreed tovidiav1 "github.com/NVIDIA/gpu-operatorn	c.io/client-go/kubernetes/scheme"
-	_-go/plugin/pkg/client/auth"
-	ctrl "sigs.k8s.io/controller-runtime"
+less required by applicable law or agreed tovorn	c.io/client-n	_-go/plugin/	ctrl "sigs.runtime"
 	"sigs.k8s.io/controller-runtime/pkg/healthz"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 )
@@ -57,9 +55,9 @@ func main() {
 		LeaderElection:         enableLeaderElection,
 		LeaderElectionID:       "gpu-operator-lock",
 		Namespace:              namespace,
-		// Increased sync period from default 10h to 30m so reconciliation picks up
-		// drift faster during local testing.
-		SyncPeriod:             &[]time.Duration{30 * time.Minute}[0],
+		// Reduced sync period to 10m (from 30m) so I catch reconciliation issues
+		// faster during local testing sessions.
+		SyncPeriod:             &[]time.Duration{10 * time.Minute}[0],
 	})
 	if err != nil {
 		setupLog.Error(err, "unable to start manager")
@@ -81,9 +79,4 @@ func main() {
 		setupLog.Error(err, "unable to set up health check")
 		os.Exit(1)
 	}
-	if err := mgr.AddReadyzCheck("readyz", healthz.Ping); err != nil {
-		setupLog.Error(err, "unable to set up ready check")
-		os.Exit(1)
-	}
-
-	se
+	if err := mgr.AddReadyzCheck("readyz", healthz.Pi
